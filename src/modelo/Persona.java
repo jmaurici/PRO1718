@@ -110,4 +110,6 @@ public abstract class Persona {
 		this.madre = madre;
 	}
 
+	
+
 }
