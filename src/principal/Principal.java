@@ -86,6 +86,9 @@ public class Principal {
 		//Arrays.sort(datos);
 		String[] cadenas =  {"perro","gato","alce"};
 		practicas.ordenaCadenas(cadenas);
+		int[] array2= {3,6,9,9,9,15,29};
+		int[] array1= {1,2,9,9,25,39,56,67,99};
+		int[] arrayMezclado = practicas.mezclaArrays(array1, array2);
 		System.out.println("fin");
 
 	}

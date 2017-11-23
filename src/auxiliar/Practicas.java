@@ -19,32 +19,53 @@ public class Practicas {
 					numeros[j] = aux;
 				}
 	}
+	// mezcla dos arrays ordenados
+
+	public int[] mezclaArrays(int[] l1, int[] l2) {
+		int i = 0, j = 0, k = 0;
+		int[] resultado = new int[l1.length + l2.length];
+
+		while (l1[i] != Integer.MAX_VALUE || l2[j] != Integer.MAX_VALUE) 
+		{
+			if (l1[i] < l2[j])
+				resultado[k] = l1[i++];
+			else
+				resultado[k] = l2[j++];
+			k++;
+
+			if (i == l1.length)
+				l1[--i] = Integer.MAX_VALUE;
+
+			if (j == l2.length)
+				l2[--j] = Integer.MAX_VALUE;
+		}
+		return resultado;
+	}
 
 	public void ordenaCadenas(String[] cadenas) {
 		for (int i = 0; i < cadenas.length - 1; i++)
 			for (int j = i + 1; j < cadenas.length; j++)
-				if (cadenas[i].compareTo(cadenas[j])>0) {
+				if (cadenas[i].compareTo(cadenas[j]) > 0) {
 					String aux = cadenas[i];
 					cadenas[i] = cadenas[j];
 					cadenas[j] = aux;
 				}
-		
-		
+
 	}
-	
-	public void ordenaEstudiantes(Estudiante[] estudiantes)
-	{
-	// ejemplo de uso de la interfaz Comparable	
+
+	public void ordenaEstudiantes(Estudiante[] estudiantes) {
+		// ejemplo de uso de la interfaz Comparable
 		// debe implementarse el método compareTo
-		
+
 		for (int i = 0; i < estudiantes.length - 1; i++)
 			for (int j = i + 1; j < estudiantes.length; j++)
-				if (estudiantes[i].compareTo(estudiantes[j])>0) {
+				if (estudiantes[i].compareTo(estudiantes[j]) > 0) {
 					Estudiante aux = estudiantes[i];
 					estudiantes[i] = estudiantes[j];
 					estudiantes[j] = aux;
 				}
 	}
+
 	public float calculaSaldo(float saldoInicial, float[] movimientos) {
 		float saldoFinal = saldoInicial;
 		for (int i = 0; i < movimientos.length; i++)
@@ -118,7 +139,7 @@ public class Practicas {
 
 		for (int i = 0; i < cuantos; i++)
 			System.out.println(inferior + (int) (Math.random() * (superior - inferior + 1)));
-			
+
 	}
 
 	public void generaAleatorios2(int cuantos, int inferior, int superior) // max 30, min 10
