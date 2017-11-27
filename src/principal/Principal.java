@@ -33,21 +33,19 @@ public class Principal {
 		 */
 		// crear un Estudiante
 
-		
-		  Estudiante estAnonimo = new Estudiante(123);
-		 
-		  Estudiante estudiante = new  Estudiante(111, "44556677G","Rafael", 'M', LocalDate.now(), 187, estAnonimo,
-		 null);
-		  Estudiante estudiante2 = new  Estudiante(111, "44556674T","Javier", 'M', LocalDate.now(), 187, estAnonimo,
-					 null);
-		  Estudiante estudiante3 = new  Estudiante(111, "44556672X","Marcos", 'M', LocalDate.now(), 187, estAnonimo,
-					 null);
-		 
-		  Estudiante[] listaEstudiantes =  {estAnonimo,estudiante,estudiante2,estudiante3};
-		 	 
+		Estudiante estAnonimo = new Estudiante(123);
+
+		Estudiante estudiante = new Estudiante(111, "44556677G", "Rafael", 'M', LocalDate.now(), 187, estAnonimo, null);
+		Estudiante estudiante2 = new Estudiante(111, "44556674T", "Javier", 'M', LocalDate.now(), 187, estAnonimo,
+				null);
+		Estudiante estudiante3 = new Estudiante(111, "44556672X", "Marcos", 'M', LocalDate.now(), 187, estAnonimo,
+				null);
+
+		Estudiante[] listaEstudiantes = { estAnonimo, estudiante, estudiante2, estudiante3 };
+
 		Practicas practicas = new Practicas();
 		practicas.ordenaEstudiantes(listaEstudiantes);
-		
+
 		// new Practicas().muestraNumerosDe1A1000();
 		// practicas.muestraNumerosDe1A1000();
 		// practicas.muestraNumeros3(20, 25);
@@ -74,21 +72,33 @@ public class Principal {
 		 * practicas.visitantesMesYear(mes, visitantesYear));
 		 */
 
-	/*	String[] misDatos = { "123","abc", "345", "1x2", "990" };
-		//int[] res = practicas.convierteCadenasANumeros(misDatos);
-		float saldo= 1000.0f;
-		float[] movimientos= {10.0f, -5.0f,20.5f};
-		
-		float saldoFinal = practicas.calculaSaldo(saldo, movimientos);
-		*/
+		/*
+		 * String[] misDatos = { "123","abc", "345", "1x2", "990" }; //int[] res =
+		 * practicas.convierteCadenasANumeros(misDatos); float saldo= 1000.0f; float[]
+		 * movimientos= {10.0f, -5.0f,20.5f};
+		 * 
+		 * float saldoFinal = practicas.calculaSaldo(saldo, movimientos);
+		 */
 		int[] datos = practicas.generaAleatorios3(500, 1, 500);
-		//practicas.ordenaEnteros(datos);
-		//Arrays.sort(datos);
-		String[] cadenas =  {"perro","gato","alce"};
+		// practicas.ordenaEnteros(datos);
+		// Arrays.sort(datos);
+		String[] cadenas = { "perro", "gato", "alce" };
 		practicas.ordenaCadenas(cadenas);
-		int[] array2= {3,6,9,9,9,15,29};
-		int[] array1= {1,2,9,9,25,39,56,67,99};
+		int[] array2 = { 3, 6, 9, 9, 9, 15, 29 };
+		int[] array1 = { 1, 2, 9, 9, 25, 39, 56, 67, 99 };
 		int[] arrayMezclado = practicas.mezclaArrays(array1, array2);
+		// liga
+		String[][] goles = new Datos().getResultados();
+
+		int[] clasificacion = practicas.obtenerClasificacion(goles);
+		String[] equipos = new Datos().getEquipos();
+		practicas.ordenaClasificacion(clasificacion, equipos);
+		for (int i = 0; i < equipos.length; i++) {
+			//System.out.println(equipos[i] + " \t" + clasificacion[i]);
+
+		}
+		String nif = "345239";
+		System.out.println(practicas.validarNif(nif)?"OK":"KO");
 		System.out.println("fin");
 
 	}

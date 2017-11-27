@@ -9,6 +9,52 @@ public class Practicas {
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
 	// "jueves", "viernes", "sábado", "domingo" };
 
+	// LIGA: Obtener clasificación a partir de resultados
+	public int[] obtenerClasificacion(String[][] goles) {
+		int[] puntos = new int[5];
+		int golesLocal;
+		int golesVisitante;
+		String[] resultado=null;
+		// recorrer la matriz de goles
+		for (int i = 0; i < goles.length; i++)
+			for (int j = 0; j < goles[i].length; j++)
+				if (goles[i][j].indexOf('-') != -1) {
+					 resultado = goles[i][j].split("-");
+					 golesLocal = Integer.parseInt(resultado[0]);
+					 golesVisitante = Integer.parseInt(resultado[1]);
+					if (golesLocal > golesVisitante)
+						// suma 3 al local
+						puntos[i] += 3;
+					else if (golesLocal < golesVisitante)
+						// suma 3 al visitante
+						puntos[j] += 3;
+					else { // empate
+						puntos[i] += 1;
+						puntos[j] += 1;
+					}				
+				}
+		return puntos;
+	}
+
+	public boolean validarNif (String nif) {
+		char[] letrasValidas = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q',
+				'V', 'H', 'L', 'C', 'K', 'E' };
+		
+		if (nif.length() != 9) return false;
+		String numeros = nif.substring(0, 8);
+		//System.out.println(numeros);
+		int numerosOK;
+		try {
+			 numerosOK = Integer.parseInt(numeros);
+		} catch (NumberFormatException e) {		
+			return false;
+		}
+		int resto = numerosOK%23;
+		if (letrasValidas[resto] != nif.charAt(8))
+			return false;
+		return true;		
+	}
+	
 	// ORDENACION
 	public void ordenaEnteros(int[] numeros) {
 		for (int i = 0; i < numeros.length - 1; i++)
@@ -19,14 +65,25 @@ public class Practicas {
 					numeros[j] = aux;
 				}
 	}
+	public void ordenaClasificacion(int[] numeros, String [] equipos) {
+		for (int i = 0; i < numeros.length - 1; i++)
+			for (int j = i + 1; j < numeros.length; j++)
+				if (numeros[i] < numeros[j]) {
+					int aux = numeros[i];
+					numeros[i] = numeros[j];
+					numeros[j] = aux;
+					String aux2 = equipos[i];
+					equipos[i] = equipos[j];
+					equipos[j] = aux2;
+				}
+	}
 	// mezcla dos arrays ordenados
 
 	public int[] mezclaArrays(int[] l1, int[] l2) {
 		int i = 0, j = 0, k = 0;
 		int[] resultado = new int[l1.length + l2.length];
 
-		while (l1[i] != Integer.MAX_VALUE || l2[j] != Integer.MAX_VALUE) 
-		{
+		while (l1[i] != Integer.MAX_VALUE || l2[j] != Integer.MAX_VALUE) {
 			if (l1[i] < l2[j])
 				resultado[k] = l1[i++];
 			else
