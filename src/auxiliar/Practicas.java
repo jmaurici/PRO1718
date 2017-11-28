@@ -3,6 +3,7 @@ package auxiliar;
 import java.util.Random;
 
 import modelo.Datos;
+import modelo.Equipo;
 import modelo.Estudiante;
 
 public class Practicas {
@@ -14,14 +15,14 @@ public class Practicas {
 		int[] puntos = new int[5];
 		int golesLocal;
 		int golesVisitante;
-		String[] resultado=null;
+		String[] resultado = null;
 		// recorrer la matriz de goles
 		for (int i = 0; i < goles.length; i++)
 			for (int j = 0; j < goles[i].length; j++)
 				if (goles[i][j].indexOf('-') != -1) {
-					 resultado = goles[i][j].split("-");
-					 golesLocal = Integer.parseInt(resultado[0]);
-					 golesVisitante = Integer.parseInt(resultado[1]);
+					resultado = goles[i][j].split("-");
+					golesLocal = Integer.parseInt(resultado[0]);
+					golesVisitante = Integer.parseInt(resultado[1]);
 					if (golesLocal > golesVisitante)
 						// suma 3 al local
 						puntos[i] += 3;
@@ -31,30 +32,74 @@ public class Practicas {
 					else { // empate
 						puntos[i] += 1;
 						puntos[j] += 1;
-					}				
+					}
 				}
 		return puntos;
 	}
 
-	public boolean validarNif (String nif) {
+	public int[] obtenerClasificacion2(String[][] goles) {
+		// la diferencia con el anterior es que recorre la
+		// matriz por columnas
+		int[] puntos = new int[5];
+		int golesLocal;
+		int golesVisitante;
+		String[] resultado = null;
+		// recorrer la matriz de goles
+		for (int j = 0; j < goles[0].length; j++)
+			for (int i = 0; i < goles.length; i++)
+				if (goles[i][j].indexOf('-') != -1) {
+					resultado = goles[i][j].split("-");
+					golesLocal = Integer.parseInt(resultado[0]);
+					golesVisitante = Integer.parseInt(resultado[1]);
+					if (golesLocal > golesVisitante)
+						// suma 3 al local
+						puntos[i] += 3;
+					else if (golesLocal < golesVisitante)
+						// suma 3 al visitante
+						puntos[j] += 3;
+					else { // empate
+						puntos[i] += 1;
+						puntos[j] += 1;
+					}
+				}
+		return puntos;
+	}
+
+	public Equipo[] obtenerClasificacion3(int[][] puntosJornadas) {
+		Equipo[] clasificacion = new Equipo[5];
+		String[] equipos = new Datos().getEquipos();
+		for (int j = 0; j < puntosJornadas[0].length; j++) {
+			Equipo e = new Equipo();
+			e.setNombre(equipos[j]);
+			e.setPuntos(0);
+			for (int i = 0; i < clasificacion.length; i++)
+				e.setPuntos(e.getPuntos() + puntosJornadas[i][j]);
+			clasificacion[j] = e;
+		}
+
+		return clasificacion;
+	}
+
+	public boolean validarNif(String nif) {
 		char[] letrasValidas = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q',
 				'V', 'H', 'L', 'C', 'K', 'E' };
-		
-		if (nif.length() != 9) return false;
+
+		if (nif.length() != 9)
+			return false;
 		String numeros = nif.substring(0, 8);
-		//System.out.println(numeros);
+		// System.out.println(numeros);
 		int numerosOK;
 		try {
-			 numerosOK = Integer.parseInt(numeros);
-		} catch (NumberFormatException e) {		
+			numerosOK = Integer.parseInt(numeros);
+		} catch (NumberFormatException e) {
 			return false;
 		}
-		int resto = numerosOK%23;
+		int resto = numerosOK % 23;
 		if (letrasValidas[resto] != nif.charAt(8))
 			return false;
-		return true;		
+		return true;
 	}
-	
+
 	// ORDENACION
 	public void ordenaEnteros(int[] numeros) {
 		for (int i = 0; i < numeros.length - 1; i++)
@@ -65,7 +110,8 @@ public class Practicas {
 					numeros[j] = aux;
 				}
 	}
-	public void ordenaClasificacion(int[] numeros, String [] equipos) {
+
+	public void ordenaClasificacion(int[] numeros, String[] equipos) {
 		for (int i = 0; i < numeros.length - 1; i++)
 			for (int j = i + 1; j < numeros.length; j++)
 				if (numeros[i] < numeros[j]) {

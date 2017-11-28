@@ -14,7 +14,18 @@ public class Datos {
     		{"2-2","1-3","1-0","","3-0"}, // SEV LOCAL
     		{"0-0","1-2","2-1","2-3",""}, // UDLP LOCAL 		
     };
-    		
+    private	int[][] puntosJornada= {
+    			// primera vuelta
+    			{3,3,1,3,1},	
+    			{1,1,1,0,0},
+    			{3,0,1,3,1},
+    			{3,1,1,0,1},
+    			//  segunda vuelta
+    			{3,3,1,3,1},	
+    			{1,1,1,0,0},
+    			{3,0,1,3,1},
+    			{3,1,1,0,1}
+    	};
     
 	// Declarar propiedad private,un array  de Estudiantes
 	// crea getter/setter
@@ -33,6 +44,14 @@ public class Datos {
 	estudiantes[0]= est1;
 	estudiantes[1]= est2;
 
+	}
+
+	public int[][] getPuntosJornada() {
+		return puntosJornada;
+	}
+
+	public void setPuntosJornada(int[][] puntosJornada) {
+		this.puntosJornada = puntosJornada;
 	}
 
 	public String[][] getResultados() {

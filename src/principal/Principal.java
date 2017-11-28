@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import auxiliar.Practicas;
 import modelo.Datos;
+import modelo.Equipo;
 import modelo.Estudiante;
 import modelo.Persona;
 import modelo.Profesor;
@@ -90,15 +91,17 @@ public class Principal {
 		// liga
 		String[][] goles = new Datos().getResultados();
 
-		int[] clasificacion = practicas.obtenerClasificacion(goles);
+		int[] clasificacion = practicas.obtenerClasificacion2(goles);
 		String[] equipos = new Datos().getEquipos();
 		practicas.ordenaClasificacion(clasificacion, equipos);
 		for (int i = 0; i < equipos.length; i++) {
-			//System.out.println(equipos[i] + " \t" + clasificacion[i]);
+			System.out.println(equipos[i] + " \t" + clasificacion[i]);
 
 		}
+		int[][] puntosJornadas = new Datos().getPuntosJornada();
+		Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
 		String nif = "345239";
-		System.out.println(practicas.validarNif(nif)?"OK":"KO");
+	//	System.out.println(practicas.validarNif(nif)?"OK":"KO");
 		System.out.println("fin");
 
 	}
