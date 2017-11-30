@@ -95,13 +95,18 @@ public class Principal {
 		String[] equipos = new Datos().getEquipos();
 		practicas.ordenaClasificacion(clasificacion, equipos);
 		for (int i = 0; i < equipos.length; i++) {
-			System.out.println(equipos[i] + " \t" + clasificacion[i]);
+			//System.out.println(equipos[i] + " \t" + clasificacion[i]);
 
 		}
 		int[][] puntosJornadas = new Datos().getPuntosJornada();
 		Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
 		String nif = "345239";
 	//	System.out.println(practicas.validarNif(nif)?"OK":"KO");
+		int x=67;
+		System.out.println("El numero "+ x + (practicas.esPrimo(x)?" ES ":" NO ES ")+ " PRIMO" );
+		
+		//int[] primos = practicas.numerosPrimos(100);
+		int [] fibonacci = practicas.numerosFibonacci(20);
 		System.out.println("fin");
 
 	}

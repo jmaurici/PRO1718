@@ -10,6 +10,44 @@ public class Practicas {
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
 	// "jueves", "viernes", "sábado", "domingo" };
 
+	public boolean esPrimo(int numero) {
+
+		for (int i = 2; i < numero; i++) {
+			if (numero % i == 0)
+				return false;
+		}
+
+		return true;
+	}
+
+	public int[] numerosPrimos(int cuantos) {
+		int[] primos = new int[cuantos];
+		int i = 0;
+		int j = 1;
+		while (i < cuantos) {
+			if (esPrimo(j))
+				primos[i++] = j;
+			j++;
+		}
+		return primos;
+	}
+
+	public int[] numerosFibonacci(int cuantos) {
+		int[] numeros = new int[cuantos];
+		int x = 0;
+		int y = 1;
+		int z;
+		numeros[0] = x;
+		numeros[1] = y;
+		for (int i = 2; i < cuantos; i++) {
+			z = x + y;
+			numeros[i] = z;
+			x=y;
+			y=z;
+		}
+		return numeros;
+	}
+
 	// LIGA: Obtener clasificación a partir de resultados
 	public int[] obtenerClasificacion(String[][] goles) {
 		int[] puntos = new int[5];
