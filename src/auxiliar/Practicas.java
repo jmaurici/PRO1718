@@ -42,8 +42,8 @@ public class Practicas {
 		for (int i = 2; i < cuantos; i++) {
 			z = x + y;
 			numeros[i] = z;
-			x=y;
-			y=z;
+			x = y;
+			y = z;
 		}
 		return numeros;
 	}
@@ -367,5 +367,48 @@ public class Practicas {
 		for (int i = 0; i < v.length; i++)
 			acu += v[i][mes];
 		return acu;
+	}
+
+	public void recorrerMatrizIrregularPorColumnas(int[][] matriz) {
+		int JMAX = 0;
+		// obtenemos el numero maximo de columnas
+		for (int i = 0; i < matriz.length; i++) {
+			if (matriz[i].length > JMAX)
+				JMAX = matriz[i].length;
+		}
+
+		for (int j = 0; j < JMAX; j++) {
+			for (int i = 0; i < matriz.length; i++) {
+				try {
+					System.out.println("[" + i + "][" + j + "]: " + matriz[i][j]);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					continue;
+				}
+
+			}
+		}
+	}
+
+	public void recorrerMatrizIrregularPorColumnas2(Integer[][] matriz) {
+		int JMAX = 0;
+		// obtenemos el numero maximo de columnas
+		for (int i = 0; i < matriz.length; i++) {
+			if (matriz[i].length > JMAX)
+				JMAX = matriz[i].length;
+		}
+
+		for (int j = 0; j < JMAX; j++) {
+			for (int i = 0; i < matriz.length; i++) {
+				try {
+					System.out.println("[" + i + "][" + j + "]: " + matriz[i][j].byteValue());
+				} catch (ArrayIndexOutOfBoundsException e) {
+					continue;
+				}
+				catch (NullPointerException e) {
+					continue;
+				}
+
+			}
+		}
 	}
 }

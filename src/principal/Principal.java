@@ -103,10 +103,21 @@ public class Principal {
 		String nif = "345239";
 	//	System.out.println(practicas.validarNif(nif)?"OK":"KO");
 		int x=67;
-		System.out.println("El numero "+ x + (practicas.esPrimo(x)?" ES ":" NO ES ")+ " PRIMO" );
-		
+		//System.out.println("El numero "+ x + (practicas.esPrimo(x)?" ES ":" NO ES ")+ " PRIMO" );
+		int[][] matriz = {
+				{3,4,8},
+				{6},
+				{5,9}
+		};
+		Integer[][] matriz2 = {
+				{3,4,null,8,null,12,37,null},
+				{6,7,12,null,34,21,null,11},
+				{5,null,9}
+		};
+	//	practicas.recorrerMatrizIrregularPorColumnas(matriz);
+		practicas.recorrerMatrizIrregularPorColumnas2(matriz2);
 		//int[] primos = practicas.numerosPrimos(100);
-		int [] fibonacci = practicas.numerosFibonacci(20);
+		//int [] fibonacci = practicas.numerosFibonacci(20);
 		System.out.println("fin");
 
 	}
