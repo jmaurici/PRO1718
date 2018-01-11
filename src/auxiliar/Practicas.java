@@ -1,5 +1,8 @@
 package auxiliar;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import modelo.Datos;
@@ -7,6 +10,69 @@ import modelo.Equipo;
 import modelo.Estudiante;
 
 public class Practicas {
+
+	// SEGUNDA EVALUACION
+
+	public ArrayList<Estudiante> introListas() {
+		ArrayList<Estudiante> listaE;
+		listaE = new ArrayList<Estudiante>();
+		Estudiante est1 = new Estudiante(123);
+		listaE.add(est1);
+		listaE.add(est1);
+		listaE.add(est1);
+		listaE.add(est1);
+		listaE.add(est1);
+		int tam = listaE.size();
+		Estudiante est2 = new Estudiante(321);
+		listaE.add(0, est2);
+		listaE.remove(listaE.size() - 1);
+		// listaE.set(0, est1);
+		for (Estudiante estudiante : listaE) {
+			// System.out.println(estudiante.getCodGrupo());
+		}
+		for (int i = 0; i < listaE.size(); i++) {
+			// System.out.println(listaE.get(i).getCodGrupo());
+		}
+
+		// System.out.println("fin introListas");
+		return listaE;
+
+	}
+
+	// 11 enero 2018
+	// Leer una matriz de int y devolverla como ArrayList
+
+	public ArrayList<ArrayList<Integer>> convierteMatrizArrayLista(int[][] matriz) {
+
+		ArrayList<ArrayList<Integer>> resultado = new ArrayList<ArrayList<Integer>>();
+		for (int[] filaMatriz : matriz) {
+			// crear alist
+			ArrayList<Integer> filaLista = new ArrayList<Integer>();
+			for (int numero : filaMatriz)
+				filaLista.add(numero);
+			resultado.add(filaLista);
+		}
+		return resultado;
+	}
+
+	
+	// Mapas, clase HashMap
+	
+	public HashMap<String, Estudiante> introMapas(){
+		// la clave representa el nif del Estudiante
+		HashMap<String, Estudiante> resultado = new HashMap<String, Estudiante>();
+		Estudiante est = new Estudiante(123, "435G", "Paco", 'M', null, 180, null, null);
+		resultado.put(est.getNif(), est);
+		Estudiante estudiante = resultado.get("435G");
+		resultado.put("123T",new Estudiante(123, "123T", "Pepe", 'M', null, 180, null, null));
+		return resultado;
+	}
+	
+	
+	
+	
+	
+	
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
 	// "jueves", "viernes", "sábado", "domingo" };
 
@@ -229,6 +295,24 @@ public class Practicas {
 		return resultado;
 	}
 
+	public ArrayList<Integer> convierteCadenasANumeros(ArrayList<String> cadenas) {
+		// int[] resultado = new int[cadenas.length];
+		ArrayList<Integer> resultado = new ArrayList<Integer>();
+		// for (int i = 0; i < resultado.length; i++) {
+		for (String cadena : cadenas) {
+			try {
+
+				// resultado[i] = Integer.parseInt(cadenas[i]);
+				resultado.add(Integer.parseInt(cadena));
+			} catch (NumberFormatException e) {
+
+				// resultado[i] = -1;
+				resultado.add(-1);
+			}
+		}
+		return resultado;
+	}
+
 	public void muestraNumeros() {
 
 		int x = 0;
@@ -355,6 +439,17 @@ public class Practicas {
 		}
 	}
 
+	public void listaEstudiantes(ArrayList<Estudiante> lista) {
+		for (Estudiante estudiante : lista) {
+			// if (estudiante != null)
+			try {
+				System.out.println(estudiante.getNombre());
+			} catch (NullPointerException e) {
+
+			}
+		}
+	}
+
 	public int visitantesIslaYear(int isla, int[][] v) {
 		int acu = 0;
 		for (int j = 0; j < v[0].length; j++)
@@ -403,8 +498,7 @@ public class Practicas {
 					System.out.println("[" + i + "][" + j + "]: " + matriz[i][j].byteValue());
 				} catch (ArrayIndexOutOfBoundsException e) {
 					continue;
-				}
-				catch (NullPointerException e) {
+				} catch (NullPointerException e) {
 					continue;
 				}
 

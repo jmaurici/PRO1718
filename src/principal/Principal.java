@@ -1,6 +1,7 @@
 package principal;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import auxiliar.Practicas;
@@ -63,6 +64,15 @@ public class Principal {
 				{ 23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 45 }, { 23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 37 }
 
 		};
+		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
+		
+		
+		
+		
+		
+		
+		
+		
 		String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
 		String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
 
@@ -115,9 +125,17 @@ public class Principal {
 				{5,null,9}
 		};
 	//	practicas.recorrerMatrizIrregularPorColumnas(matriz);
-		practicas.recorrerMatrizIrregularPorColumnas2(matriz2);
+		//practicas.recorrerMatrizIrregularPorColumnas2(matriz2);
 		//int[] primos = practicas.numerosPrimos(100);
 		//int [] fibonacci = practicas.numerosFibonacci(20);
+		//ArrayList<Estudiante> lista = practicas.introListas();
+	//	practicas.listaEstudiantes(practicas.introListas());
+		ArrayList<String> lista = new ArrayList<String>();
+		lista.add("12");
+		lista.add("19");
+		lista.add("-12");
+		lista.add("1x2");
+		//ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
 		System.out.println("fin");
 
 	}
