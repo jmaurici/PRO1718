@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
@@ -88,47 +88,32 @@ public class Practicas {
 			FileReader fr = new FileReader("ficheros/personas.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String linea;
-			LocalDate fechaHoy;
-			System.out.println(LocalDate.now());
+			// System.out.println(LocalDate.now());
 			// Leer el fichero linea a linea
-			while (true) {
-				linea = br.readLine();
-				// while ((linea = br.readLine()) != null) {
+			while ((linea = br.readLine()) != null) {
+
 				String[] campos = linea.split("&&");
-
+				System.out.println(linea);
 				System.out.println(calculaEdad(campos[2]));
-				linea.length();
 
-				// Cerrar fichero
-				// fr.close();
-				// br.close();
 			}
+			fr.close();
+			br.close();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
-		} catch (NullPointerException e) {
-			System.out.println("EOF");
 		}
 	}
 
 	public int calculaEdad(String fechaNacimiento) { // ddmmaaaa
-		Calendar cal = Calendar.getInstance();
-
-		int year = Integer.parseInt(fechaNacimiento.substring(4, 8));
-		int mes = Integer.parseInt(fechaNacimiento.substring(2, 4));
-		int dia = Integer.parseInt(fechaNacimiento.substring(0, 2));
-		System.out.println(dia + "," + mes + "," + year);
-		cal.set(year, mes, dia);
-		
-		Date hoy = cal.getTime();
-		// cal.set(1985, Calendar.JANUARY, 30);
-
-		Date birthday = cal.getTime();
-
-		long diferenciaMilisegundos = hoy.getTime() - birthday.getTime();
-		long time = 1000 * 60 * 60 * 24;
-		return (int) (diferenciaMilisegundos / time);
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("ddMMyyyy");
+		LocalDate fechaNac = LocalDate.parse(fechaNacimiento, fmt);
+		LocalDate ahora = LocalDate.now();
+		Period periodo = Period.between(fechaNac, ahora);
+		System.out.printf("Tu edad es: %s años, %s meses y %s días", periodo.getYears(), periodo.getMonths(),
+				periodo.getDays());
+		return periodo.getYears();
 	}
 
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
