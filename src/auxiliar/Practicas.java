@@ -1,9 +1,16 @@
 package auxiliar;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 import modelo.Datos;
 import modelo.Equipo;
@@ -55,24 +62,75 @@ public class Practicas {
 		return resultado;
 	}
 
-	
 	// Mapas, clase HashMap
-	
-	public HashMap<String, Estudiante> introMapas(){
+
+	public HashMap<String, Estudiante> introMapas() {
 		// la clave representa el nif del Estudiante
 		HashMap<String, Estudiante> resultado = new HashMap<String, Estudiante>();
 		Estudiante est = new Estudiante(123, "435G", "Paco", 'M', null, 180, null, null);
 		resultado.put(est.getNif(), est);
 		Estudiante estudiante = resultado.get("435G");
-		resultado.put("123T",new Estudiante(123, "123T", "Pepe", 'M', null, 180, null, null));
+		Estudiante est2 = new Estudiante(321, "435G", "Carlos", 'M', null, 180, null, null);
+
+		resultado.put("435G", est2);
+		resultado.put("123T", new Estudiante(123, "123T", "Pepe", 'M', null, 180, null, null));
+		Set<String> claves = resultado.keySet();
+		for (String clave : claves) {
+			// System.out.println(resultado.get(clave).getNombre());
+		}
+
 		return resultado;
 	}
-	
-	
-	
-	
-	
-	
+
+	public void leerFicheroTexto() {
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/personas.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			LocalDate fechaHoy;
+			System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while (true) {
+				linea = br.readLine();
+				// while ((linea = br.readLine()) != null) {
+				String[] campos = linea.split("&&");
+
+				System.out.println(calculaEdad(campos[2]));
+				linea.length();
+
+				// Cerrar fichero
+				// fr.close();
+				// br.close();
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (NullPointerException e) {
+			System.out.println("EOF");
+		}
+	}
+
+	public int calculaEdad(String fechaNacimiento) { // ddmmaaaa
+		Calendar cal = Calendar.getInstance();
+
+		int year = Integer.parseInt(fechaNacimiento.substring(4, 8));
+		int mes = Integer.parseInt(fechaNacimiento.substring(2, 4));
+		int dia = Integer.parseInt(fechaNacimiento.substring(0, 2));
+		System.out.println(dia + "," + mes + "," + year);
+		cal.set(year, mes, dia);
+		
+		Date hoy = cal.getTime();
+		// cal.set(1985, Calendar.JANUARY, 30);
+
+		Date birthday = cal.getTime();
+
+		long diferenciaMilisegundos = hoy.getTime() - birthday.getTime();
+		long time = 1000 * 60 * 60 * 24;
+		return (int) (diferenciaMilisegundos / time);
+	}
+
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
 	// "jueves", "viernes", "sábado", "domingo" };
 

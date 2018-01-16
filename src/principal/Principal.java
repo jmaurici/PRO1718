@@ -3,6 +3,8 @@ package principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
 
 import auxiliar.Practicas;
 import modelo.Datos;
@@ -135,7 +137,12 @@ public class Principal {
 		lista.add("19");
 		lista.add("-12");
 		lista.add("1x2");
-		//ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
+		ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
+		HashMap<String, Estudiante> mapa = practicas.introMapas();
+		Estudiante noexisto = mapa.get("noexisto");
+		
+		practicas.leerFicheroTexto();
+		
 		System.out.println("fin");
 
 	}
