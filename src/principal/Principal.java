@@ -141,8 +141,8 @@ public class Principal {
 		HashMap<String, Estudiante> mapa = practicas.introMapas();
 		Estudiante noexisto = mapa.get("noexisto");
 		
-		practicas.leerFicheroTexto();
-		
+		//practicas.leerFicheroTexto();
+		HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
 		System.out.println("fin");
 
 	}
