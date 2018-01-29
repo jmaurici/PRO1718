@@ -1,8 +1,10 @@
 package auxiliar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -133,7 +135,24 @@ public class Practicas {
 		}
 		return resultado;
 	}
-
+public void generaFicheroLanzamientosDado(int cuantos, String rutaFichero) {
+	try {
+		BufferedWriter fb = new BufferedWriter(new FileWriter(rutaFichero));
+		Random rnd = new Random();		
+		for (int i = 0; i < cuantos; i++) {
+			int numero = 1 + rnd.nextInt(6);
+		    String registro = System.currentTimeMillis() +	"#"+ i+"#"+numero+"\n";
+		    int retardo =  1 + rnd.nextInt(1000);
+		    Thread.sleep(retardo);
+		    fb.write(registro);
+		}
+		fb.close();		
+	} catch (IOException e) {
+		System.out.println(e.getMessage());
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+}
 	public HashMap<String, Float> resumenVentasPorVendedor(HashMap<String, ArrayList<Float>> ventas) {
 		HashMap<String, Float> resultado = new HashMap<String, Float>();
 		// recorrer hm de entrada creando el de salida
