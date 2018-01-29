@@ -3,6 +3,7 @@ package principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -133,16 +134,24 @@ public class Principal {
 		//ArrayList<Estudiante> lista = practicas.introListas();
 	//	practicas.listaEstudiantes(practicas.introListas());
 		ArrayList<String> lista = new ArrayList<String>();
-		lista.add("12");
+		lista.add("120");
 		lista.add("19");
 		lista.add("-12");
-		lista.add("1x2");
+		lista.add("12");
 		ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
 		HashMap<String, Estudiante> mapa = practicas.introMapas();
 		Estudiante noexisto = mapa.get("noexisto");
 		
 		//practicas.leerFicheroTexto();
 		HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
+		HashMap<String, Float> resumenVentasVendedor = practicas.resumenVentasPorVendedor(hm);
+		
+		ArrayList<Float> movs = new ArrayList<Float>();
+		movs.add(12.5f);
+		movs.add(-12.5f);
+		movs.add(10.5f);
+		float sFinal = practicas.calculaSaldo(20.0f, movs);
+		Collections.sort(lista);
 		System.out.println("fin");
 
 	}

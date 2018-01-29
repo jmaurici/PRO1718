@@ -133,13 +133,21 @@ public class Practicas {
 		}
 		return resultado;
 	}
-public HashMap<String,Float> resumenVentasPorVendedor( HashMap<String, ArrayList<Float>> ventas){
-	HashMap<String, Float> resultado = new HashMap<String,Float>();
-	// recorrer hm de entrada creando el de salida
-	
-	
-	return resultado;	
-}
+
+	public HashMap<String, Float> resumenVentasPorVendedor(HashMap<String, ArrayList<Float>> ventas) {
+		HashMap<String, Float> resultado = new HashMap<String, Float>();
+		// recorrer hm de entrada creando el de salida
+		Set<String> claves = ventas.keySet();
+		for (String clave : claves) {
+			ArrayList<Float> listaVentas = ventas.get(clave);
+			float acumuladoVendedor = 0;
+			for (Float importe : listaVentas)
+				acumuladoVendedor += importe;
+			resultado.put(clave, acumuladoVendedor);
+		}
+		return resultado;
+	}
+
 	public int calculaEdad(String fechaNacimiento) { // ddmmaaaa
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("ddMMyyyy");
 		LocalDate fechaNac = LocalDate.parse(fechaNacimiento, fmt);
@@ -356,6 +364,14 @@ public HashMap<String,Float> resumenVentasPorVendedor( HashMap<String, ArrayList
 		for (int i = 0; i < movimientos.length; i++)
 			saldoFinal += movimientos[i];
 		return saldoFinal;
+	}
+
+	public float calculaSaldo(float saldoInicial, ArrayList<Float> movimientos) {
+		float saldoFinal = saldoInicial;
+		for (Float movimiento : movimientos)
+			saldoFinal += movimiento.floatValue();
+		return saldoFinal;
+
 	}
 
 	public int[] convierteCadenasANumeros(String[] cadenas) {
