@@ -143,14 +143,15 @@ public class Principal {
 		Estudiante noexisto = mapa.get("noexisto");
 		
 		//practicas.leerFicheroTexto();
-		HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
-		HashMap<String, Float> resumenVentasVendedor = practicas.resumenVentasPorVendedor(hm);
-		practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
+		//HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
+		//HashMap<String, Float> resumenVentasVendedor = practicas.resumenVentasPorVendedor(hm);
+		//practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
+		Practicas.grabarObjetosEnFichero("ficheros/estudiantes.obj");
 		ArrayList<Float> movs = new ArrayList<Float>();
 		movs.add(12.5f);
 		movs.add(-12.5f);
 		movs.add(10.5f);
-		float sFinal = practicas.calculaSaldo(20.0f, movs);
+		//float sFinal = practicas.calculaSaldo(20.0f, movs);
 		Collections.sort(lista);
 		System.out.println("fin");
 

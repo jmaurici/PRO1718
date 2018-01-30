@@ -3,9 +3,11 @@ package auxiliar;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -83,7 +85,52 @@ public class Practicas {
 
 		return resultado;
 	}
+	
+	public static void grabarObjetosEnFichero(String fichero) {
+		Estudiante est = new Estudiante(1, "111G", "Paco1", 'M', null, 181, null, null);
+		Estudiante est1 = new Estudiante(2, "222G", "Paco2", 'M', null, 180, null, null);
+		Estudiante est2 = new Estudiante(3, "333G", "Paco3", 'M', null, 180, null, null);
+		
+         // abrir el fichero de objetos...
+		try {
+			ObjectOutputStream fObj = new ObjectOutputStream(new FileOutputStream(fichero));
+			
+			// guardar los objetos estudiantes en el fichero...
+			
+			fObj.writeObject(est);
+			fObj.writeObject(est1);
+			fObj.writeObject(est2);
+			fObj.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichero no encontrado");
+		} catch (IOException e) {
+			System.out.println("Error IO");
 
+		}
+		System.out.println("Fin del método");
+		
+		
+	
+	
+	
+	
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void leerFicheroTexto() {
 		try {
 			// Abrir el fichero
