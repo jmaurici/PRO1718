@@ -3,7 +3,7 @@ package modelo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Estudiante extends Persona implements Serializable, Comparable<Estudiante> {
+public class Estudiante extends Persona implements Comparable<Estudiante> {
 	/**
 	 * 
 	 */
@@ -16,9 +16,10 @@ public class Estudiante extends Persona implements Serializable, Comparable<Estu
 	}
 
 	public Estudiante(int codGrupo, String nif, String nombre, char sexo, LocalDate fecha, int altura, Persona padre, Persona madre) {
+		
 		super(nif,nombre, sexo, fecha, altura, padre, madre);
 		this.codGrupo = codGrupo;
-
+		//System.out.println("construyendo estudiante");
 	}
 	public String toString() {
 		

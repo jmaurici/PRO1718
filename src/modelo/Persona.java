@@ -1,9 +1,14 @@
 package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Persona {
+public abstract class Persona implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nif;
 	private String nombre;
 	private char sexo; // 'M' 'F'
@@ -41,6 +46,7 @@ public abstract class Persona {
 		this.padre = padre;
 		this.madre = madre;
 		contador++;
+		
 	}
 @Override	
 

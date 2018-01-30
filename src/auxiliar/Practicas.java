@@ -2,11 +2,13 @@ package auxiliar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Period;
@@ -85,52 +87,56 @@ public class Practicas {
 
 		return resultado;
 	}
-	
+
 	public static void grabarObjetosEnFichero(String fichero) {
-		Estudiante est = new Estudiante(1, "111G", "Paco1", 'M', null, 181, null, null);
-		Estudiante est1 = new Estudiante(2, "222G", "Paco2", 'M', null, 180, null, null);
-		Estudiante est2 = new Estudiante(3, "333G", "Paco3", 'M', null, 180, null, null);
-		
-         // abrir el fichero de objetos...
+		Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
+		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
+		Estudiante est2 = new Estudiante(30, "333G", "Paco3", 'M', null, 180, null, null);
+
+		// abrir el fichero de objetos...
 		try {
-			ObjectOutputStream fObj = new ObjectOutputStream(new FileOutputStream(fichero));
-			
+			FileOutputStream fIs = new FileOutputStream(fichero);
+			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
+
 			// guardar los objetos estudiantes en el fichero...
-			
+
 			fObj.writeObject(est);
 			fObj.writeObject(est1);
 			fObj.writeObject(est2);
 			fObj.close();
-			
+			fIs.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichero no encontrado");
 		} catch (IOException e) {
 			System.out.println("Error IO");
 
 		}
-		System.out.println("Fin del método");
-		
-		
-	
-	
-	
-	
-	
+		System.out.println("Fichero creado");
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void leeObjetosDesdeFichero(String fichero) {
+		try {
+			FileInputStream fIs = new FileInputStream(fichero);
+			ObjectInputStream fObj = new ObjectInputStream(fIs);
+
+			// recorrer el fichero
+			Estudiante est = null;
+			while (fIs.available() > 0) {
+				est = (Estudiante) fObj.readObject();
+				System.out.println(est.getCodGrupo()+ ", "+ est.getNombre());
+			}
+			fIs.close();
+			fObj.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichero no encontrado");
+		} catch (IOException e) {
+			System.out.println("Error IO");
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFound");
+		}
+
+	}
+
 	public void leerFicheroTexto() {
 		try {
 			// Abrir el fichero
@@ -182,24 +188,26 @@ public class Practicas {
 		}
 		return resultado;
 	}
-public void generaFicheroLanzamientosDado(int cuantos, String rutaFichero) {
-	try {
-		BufferedWriter fb = new BufferedWriter(new FileWriter(rutaFichero));
-		Random rnd = new Random();		
-		for (int i = 0; i < cuantos; i++) {
-			int numero = 1 + rnd.nextInt(6);
-		    String registro = System.currentTimeMillis() +	"#"+ i+"#"+numero+"\n";
-		    int retardo =  1 + rnd.nextInt(1000);
-		    Thread.sleep(retardo);
-		    fb.write(registro);
+
+	public void generaFicheroLanzamientosDado(int cuantos, String rutaFichero) {
+		try {
+			BufferedWriter fb = new BufferedWriter(new FileWriter(rutaFichero));
+			Random rnd = new Random();
+			for (int i = 0; i < cuantos; i++) {
+				int numero = 1 + rnd.nextInt(6);
+				String registro = System.currentTimeMillis() + "#" + i + "#" + numero + "\n";
+				int retardo = 1 + rnd.nextInt(1000);
+				Thread.sleep(retardo);
+				fb.write(registro);
+			}
+			fb.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		fb.close();		
-	} catch (IOException e) {
-		System.out.println(e.getMessage());
-	} catch (InterruptedException e) {
-		e.printStackTrace();
 	}
-}
+
 	public HashMap<String, Float> resumenVentasPorVendedor(HashMap<String, ArrayList<Float>> ventas) {
 		HashMap<String, Float> resultado = new HashMap<String, Float>();
 		// recorrer hm de entrada creando el de salida

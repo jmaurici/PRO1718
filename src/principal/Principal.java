@@ -146,7 +146,13 @@ public class Principal {
 		//HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
 		//HashMap<String, Float> resumenVentasVendedor = practicas.resumenVentasPorVendedor(hm);
 		//practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
+		
+		
 		Practicas.grabarObjetosEnFichero("ficheros/estudiantes.obj");
+		practicas.leeObjetosDesdeFichero("ficheros/estudiantes.obj");
+		
+		
+		
 		ArrayList<Float> movs = new ArrayList<Float>();
 		movs.add(12.5f);
 		movs.add(-12.5f);
