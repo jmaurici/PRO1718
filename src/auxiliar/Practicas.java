@@ -23,6 +23,7 @@ import modelo.Equipo;
 import modelo.Estudiante;
 
 public class Practicas {
+	
 
 	// SEGUNDA EVALUACION
 
@@ -92,17 +93,24 @@ public class Practicas {
 		Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
 		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
 		Estudiante est2 = new Estudiante(30, "333G", "Paco3", 'M', null, 180, null, null);
-
+		ArrayList<Estudiante> lista = new ArrayList<Estudiante>();
+		
+		// añadimos los 3 estudiantes a la lista
+		
+		lista.add(est);
+		lista.add(est1);
+		lista.add(est2);
+		
 		// abrir el fichero de objetos...
 		try {
 			FileOutputStream fIs = new FileOutputStream(fichero);
 			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
 
 			// guardar los objetos estudiantes en el fichero...
-
-			fObj.writeObject(est);
-			fObj.writeObject(est1);
-			fObj.writeObject(est2);
+            fObj.writeObject(lista);
+			//fObj.writeObject(est);
+			//fObj.writeObject(est1);
+			//fObj.writeObject(est2);
 			fObj.close();
 			fIs.close();
 		} catch (FileNotFoundException e) {
@@ -121,10 +129,14 @@ public class Practicas {
 
 			// recorrer el fichero
 			Estudiante est = null;
+			ArrayList<Estudiante> lista=null;
 			while (fIs.available() > 0) {
-				est = (Estudiante) fObj.readObject();
-				System.out.println(est.getCodGrupo()+ ", "+ est.getNombre());
+				//est = (Estudiante) fObj.readObject();
+				lista = (ArrayList<Estudiante>) fObj.readObject();
+				
+				//System.out.println(est.getCodGrupo() + ", " + est.getNombre());
 			}
+			System.out.println(lista.get(0).getNombre());
 			fIs.close();
 			fObj.close();
 		} catch (FileNotFoundException e) {

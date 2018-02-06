@@ -148,8 +148,8 @@ public class Principal {
 		//practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
 		
 		
-		Practicas.grabarObjetosEnFichero("ficheros/estudiantes.obj");
-		practicas.leeObjetosDesdeFichero("ficheros/estudiantes.obj");
+		Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
+		practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
 		
 		
 		
