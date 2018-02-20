@@ -49,7 +49,7 @@ public class Principal {
 		Estudiante[] listaEstudiantes = { estAnonimo, estudiante, estudiante2, estudiante3 };
 
 		Practicas practicas = new Practicas();
-		practicas.ordenaEstudiantes(listaEstudiantes);
+		//practicas.ordenaEstudiantes(listaEstudiantes);
 
 		// new Practicas().muestraNumerosDe1A1000();
 		// practicas.muestraNumerosDe1A1000();
@@ -112,7 +112,7 @@ public class Principal {
 
 		}
 		int[][] puntosJornadas = new Datos().getPuntosJornada();
-		Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
+		//Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
 		String nif = "345239";
 	//	System.out.println(practicas.validarNif(nif)?"OK":"KO");
 		int x=67;
@@ -138,9 +138,9 @@ public class Principal {
 		lista.add("19");
 		lista.add("-12");
 		lista.add("12");
-		ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
-		HashMap<String, Estudiante> mapa = practicas.introMapas();
-		Estudiante noexisto = mapa.get("noexisto");
+		//ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
+		//HashMap<String, Estudiante> mapa = practicas.introMapas();
+		//Estudiante noexisto = mapa.get("noexisto");
 		
 		//practicas.leerFicheroTexto();
 		//HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
@@ -148,8 +148,8 @@ public class Principal {
 		//practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
 		
 		
-		Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
-		practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
+		//Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
+	//	practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
 		
 		
 		
@@ -159,6 +159,8 @@ public class Principal {
 		movs.add(10.5f);
 		//float sFinal = practicas.calculaSaldo(20.0f, movs);
 		Collections.sort(lista);
+		
+		HashMap<Integer, ArrayList<Float>> xyz = practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
 		System.out.println("fin");
 
 	}

@@ -23,7 +23,6 @@ import modelo.Equipo;
 import modelo.Estudiante;
 
 public class Practicas {
-	
 
 	// SEGUNDA EVALUACION
 
@@ -94,23 +93,23 @@ public class Practicas {
 		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
 		Estudiante est2 = new Estudiante(30, "333G", "Paco3", 'M', null, 180, null, null);
 		ArrayList<Estudiante> lista = new ArrayList<Estudiante>();
-		
+
 		// añadimos los 3 estudiantes a la lista
-		
+
 		lista.add(est);
 		lista.add(est1);
 		lista.add(est2);
-		
+
 		// abrir el fichero de objetos...
 		try {
 			FileOutputStream fIs = new FileOutputStream(fichero);
 			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
 
 			// guardar los objetos estudiantes en el fichero...
-            fObj.writeObject(lista);
-			//fObj.writeObject(est);
-			//fObj.writeObject(est1);
-			//fObj.writeObject(est2);
+			fObj.writeObject(lista);
+			// fObj.writeObject(est);
+			// fObj.writeObject(est1);
+			// fObj.writeObject(est2);
 			fObj.close();
 			fIs.close();
 		} catch (FileNotFoundException e) {
@@ -129,12 +128,12 @@ public class Practicas {
 
 			// recorrer el fichero
 			Estudiante est = null;
-			ArrayList<Estudiante> lista=null;
+			ArrayList<Estudiante> lista = null;
 			while (fIs.available() > 0) {
-				//est = (Estudiante) fObj.readObject();
+				// est = (Estudiante) fObj.readObject();
 				lista = (ArrayList<Estudiante>) fObj.readObject();
-				
-				//System.out.println(est.getCodGrupo() + ", " + est.getNombre());
+
+				// System.out.println(est.getCodGrupo() + ", " + est.getNombre());
 			}
 			System.out.println(lista.get(0).getNombre());
 			fIs.close();
@@ -199,6 +198,50 @@ public class Practicas {
 			System.out.println(e.getMessage());
 		}
 		return resultado;
+	}
+
+	public void inicializaVisitantesIsla(HashMap<Integer, ArrayList<Float>> resultado) {
+		ArrayList<Float> visitantesMeses;
+		for (int isla = 0; isla < 7; isla++) { // recorre cada isla
+			visitantesMeses = new ArrayList<Float>();
+			for (int mes = 0; mes < 12; mes++) // poner a 0 cada uno de los meses
+				visitantesMeses.add(0f);
+			resultado.put(isla, visitantesMeses);
+		}
+	}
+
+	public HashMap<Integer, ArrayList<Float>> visitantesIslaMes(String rutaFicheroVisitantes) {
+		HashMap<Integer, ArrayList<Float>> resultado = new HashMap<Integer, ArrayList<Float>>();
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader(rutaFicheroVisitantes);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			inicializaVisitantesIsla(resultado);
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+
+				String[] campos = linea.split("@");
+				int isla = Integer.parseInt(campos[0]);
+				int mes = Integer.parseInt(campos[1]);
+				float numeroVisitantes = Float.parseFloat(campos[2]);
+				resultado.get(isla - 1).set(mes - 1, numeroVisitantes);
+
+			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return resultado;
+	}
+
+	public void listadoIslasMeses(String rutaFicheroVisitantes) {
+		HashMap<Integer, ArrayList<Float>> hm = visitantesIslaMes(rutaFicheroVisitantes);
+		// recorrer hm
+
 	}
 
 	public void generaFicheroLanzamientosDado(int cuantos, String rutaFichero) {
@@ -457,6 +500,35 @@ public class Practicas {
 		for (Float movimiento : movimientos)
 			saldoFinal += movimiento.floatValue();
 		return saldoFinal;
+
+	}
+
+	public float calculaSaldo(float saldoInicial, String rutaFicheroMovs) {
+		float saldo = saldoInicial;
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/personas.txt");
+
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+
+				String[] campos = linea.split("&&");
+				System.out.println(linea);
+				System.out.println(calculaEdad(campos[2]));
+
+			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return saldo;
 
 	}
 
