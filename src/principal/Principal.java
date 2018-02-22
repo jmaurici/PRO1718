@@ -160,7 +160,8 @@ public class Principal {
 		//float sFinal = practicas.calculaSaldo(20.0f, movs);
 		Collections.sort(lista);
 		
-		HashMap<Integer, ArrayList<Float>> xyz = practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
+		//HashMap<Integer, ArrayList<Float>> xyz = practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
+		practicas.listadoIslasMeses("ficheros/visitantesIslaMes.txt");
 		System.out.println("fin");
 
 	}

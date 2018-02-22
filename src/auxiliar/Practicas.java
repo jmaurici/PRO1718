@@ -239,9 +239,38 @@ public class Practicas {
 	}
 
 	public void listadoIslasMeses(String rutaFicheroVisitantes) {
+		ArrayList<Float> visitantesIsla;
 		HashMap<Integer, ArrayList<Float>> hm = visitantesIslaMes(rutaFicheroVisitantes);
-		// recorrer hm
 
+		String[] islas = { "GRAN CANARIA", "LANZAROTE", "FUERTEVENTURA", "TENERIFE", "LA PALMA", "LA GOMERA",
+				"EL HIERRO" };
+		String[] meses = { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIE",
+				"OCTUBRE", "NOVIEM", "DICIEMBRE" };
+
+		// recorrer hm
+		float acumuladoMes[] = new float[12];
+		Set<Integer> claves = hm.keySet();
+		System.out.print("\t\t");
+		for (int i = 0; i < meses.length; i++) {
+			System.out.print(meses[i] + "\t");
+		}
+		System.out.println();
+		for (Integer clave : claves) {
+			// islas[clave]
+			visitantesIsla = hm.get(clave);
+			System.out.print(islas[clave] + "\t");
+			float acumuladoIsla = 0f;
+			for (int i=0;i<visitantesIsla.size();i++) {
+				acumuladoIsla += visitantesIsla.get(i);
+				acumuladoMes[i] += visitantesIsla.get(i);
+				System.out.printf("%.0f\t", visitantesIsla.get(i) * 1000);
+			}
+			System.out.print("\t total visitantes " + islas[clave] + " = " + acumuladoIsla);
+			System.out.println();
+		}
+		for (Float valor : acumuladoMes) {
+			System.out.print("\t\t" + valor);
+		}
 	}
 
 	public void generaFicheroLanzamientosDado(int cuantos, String rutaFichero) {
