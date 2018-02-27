@@ -149,7 +149,7 @@ public class Principal {
 		
 		
 		//Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
-	//	practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
+		practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
 		
 		
 		
@@ -161,7 +161,8 @@ public class Principal {
 		Collections.sort(lista);
 		
 		//HashMap<Integer, ArrayList<Float>> xyz = practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
-		practicas.listadoIslasMeses("ficheros/visitantesIslaMes.txt");
+		//practicas.listadoIslasMeses("ficheros/visitantesIslaMes.txt");
+		practicas.copiaEstudiantesTxtAObjetos("ficheros/estudiantes.txt", "ficheros/estudiantes.obj");
 		System.out.println("fin");
 
 	}

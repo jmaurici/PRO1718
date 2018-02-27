@@ -88,6 +88,58 @@ public class Practicas {
 		return resultado;
 	}
 
+	public Estudiante crearEstudianteLeido(String[] datos) {
+		int grupo = Integer.parseInt(datos[0]);
+		Estudiante estudiante = new Estudiante(grupo);
+		estudiante.setNif(datos[1]);
+		estudiante.setNombre(datos[2]);
+		estudiante.setSexo(datos[3].charAt(0));
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate fechaNac = LocalDate.parse(datos[4], fmt);
+		estudiante.setFecha(fechaNac);
+		estudiante.setAltura(Integer.parseInt(datos[5]));
+		estudiante.setMadre(null);
+		estudiante.setPadre(null);
+		return estudiante;
+
+	}
+
+	public void copiaEstudiantesTxtAObjetos(String rutaTxt, String rutaObj) {
+		try {
+			// Abrir el fichero entrada
+			FileReader fr = new FileReader(rutaTxt);
+			BufferedReader br = new BufferedReader(fr);
+			// Abrir el fichero salida
+			FileOutputStream fIs = new FileOutputStream(rutaObj);
+			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
+
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				String[] campos = linea.split("#");
+				// crear estudiante a partir del registro leido
+				Estudiante estudiante = crearEstudianteLeido(campos);
+				// grabar objeto estudiante en fichero ..
+				fObj.writeObject(estudiante);
+
+			}
+			fr.close();
+			br.close();
+			fIs.close();
+			fObj.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	public void copiaEstudiantesObjATxt(String rutaObj, String rutaTxt) {
+
+	}
+
 	public static void grabarObjetosEnFichero(String fichero) {
 		Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
 		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
@@ -106,10 +158,10 @@ public class Practicas {
 			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
 
 			// guardar los objetos estudiantes en el fichero...
-			fObj.writeObject(lista);
-			// fObj.writeObject(est);
-			// fObj.writeObject(est1);
-			// fObj.writeObject(est2);
+			// fObj.writeObject(lista);
+			fObj.writeObject(est);
+			fObj.writeObject(est1);
+			fObj.writeObject(est2);
 			fObj.close();
 			fIs.close();
 		} catch (FileNotFoundException e) {
@@ -121,21 +173,22 @@ public class Practicas {
 		System.out.println("Fichero creado");
 	}
 
-	public void leeObjetosDesdeFichero(String fichero) {
+	public ArrayList<Estudiante> leeObjetosDesdeFichero(String fichero) {
+		ArrayList<Estudiante> lista = null;
 		try {
 			FileInputStream fIs = new FileInputStream(fichero);
 			ObjectInputStream fObj = new ObjectInputStream(fIs);
 
 			// recorrer el fichero
 			Estudiante est = null;
-			ArrayList<Estudiante> lista = null;
+
 			while (fIs.available() > 0) {
 				// est = (Estudiante) fObj.readObject();
 				lista = (ArrayList<Estudiante>) fObj.readObject();
 
 				// System.out.println(est.getCodGrupo() + ", " + est.getNombre());
 			}
-			System.out.println(lista.get(0).getNombre());
+			// System.out.println(lista.get(0).getNombre());
 			fIs.close();
 			fObj.close();
 		} catch (FileNotFoundException e) {
@@ -145,7 +198,7 @@ public class Practicas {
 		} catch (ClassNotFoundException e) {
 			System.out.println("ClassNotFound");
 		}
-
+		return lista;
 	}
 
 	public void leerFicheroTexto() {
@@ -163,6 +216,42 @@ public class Practicas {
 				System.out.println(calculaEdad(campos[2]));
 
 			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void leerFicheroTextoOrdenadoClave(String rutaFichero) {
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader(rutaFichero);
+			BufferedReader br = new BufferedReader(fr);
+			String codigo_leido, codigo_anterior = null;
+			int contador_grupo = 0;
+			int contador_total = 0;
+			String linea;
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				String[] campos = linea.split("&&");
+				codigo_leido = campos[0];
+				if (codigo_anterior == null) // primer registro
+					codigo_anterior = codigo_leido;
+				if (!codigo_leido.equals(codigo_anterior)) {
+					System.out.println("Hay " + contador_grupo + " alumnos en el grupo " + codigo_anterior);
+					contador_total += contador_grupo;
+					contador_grupo = 0;
+					codigo_anterior = codigo_leido;
+				}
+				contador_grupo++;
+			}
+			System.out.println("Hay " + contador_grupo + " alumnos en el grupo " + codigo_anterior);
+			contador_total += contador_grupo;
+			System.out.println("Hay " + contador_total + " alumnos en total ");
+
 			fr.close();
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -260,7 +349,7 @@ public class Practicas {
 			visitantesIsla = hm.get(clave);
 			System.out.print(islas[clave] + "\t");
 			float acumuladoIsla = 0f;
-			for (int i=0;i<visitantesIsla.size();i++) {
+			for (int i = 0; i < visitantesIsla.size(); i++) {
 				acumuladoIsla += visitantesIsla.get(i);
 				acumuladoMes[i] += visitantesIsla.get(i);
 				System.out.printf("%.0f\t", visitantesIsla.get(i) * 1000);
