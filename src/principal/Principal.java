@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import auxiliar.Practicas;
@@ -49,7 +50,7 @@ public class Principal {
 		Estudiante[] listaEstudiantes = { estAnonimo, estudiante, estudiante2, estudiante3 };
 
 		Practicas practicas = new Practicas();
-		//practicas.ordenaEstudiantes(listaEstudiantes);
+		// practicas.ordenaEstudiantes(listaEstudiantes);
 
 		// new Practicas().muestraNumerosDe1A1000();
 		// practicas.muestraNumerosDe1A1000();
@@ -68,14 +69,7 @@ public class Principal {
 
 		};
 		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
-		
-		
-		
-		
-		
-		
-		
-		
+
 		String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
 		String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
 
@@ -108,61 +102,61 @@ public class Principal {
 		String[] equipos = new Datos().getEquipos();
 		practicas.ordenaClasificacion(clasificacion, equipos);
 		for (int i = 0; i < equipos.length; i++) {
-			//System.out.println(equipos[i] + " \t" + clasificacion[i]);
+			// System.out.println(equipos[i] + " \t" + clasificacion[i]);
 
 		}
 		int[][] puntosJornadas = new Datos().getPuntosJornada();
-		//Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
+		// Equipo[] clasi = practicas.obtenerClasificacion3(puntosJornadas);
 		String nif = "345239";
-	//	System.out.println(practicas.validarNif(nif)?"OK":"KO");
-		int x=67;
-		//System.out.println("El numero "+ x + (practicas.esPrimo(x)?" ES ":" NO ES ")+ " PRIMO" );
-		int[][] matriz = {
-				{3,4,8},
-				{6},
-				{5,9}
-		};
-		Integer[][] matriz2 = {
-				{3,4,null,8,null,12,37,null},
-				{6,7,12,null,34,21,null,11},
-				{5,null,9}
-		};
-	//	practicas.recorrerMatrizIrregularPorColumnas(matriz);
-		//practicas.recorrerMatrizIrregularPorColumnas2(matriz2);
-		//int[] primos = practicas.numerosPrimos(100);
-		//int [] fibonacci = practicas.numerosFibonacci(20);
-		//ArrayList<Estudiante> lista = practicas.introListas();
-	//	practicas.listaEstudiantes(practicas.introListas());
+		// System.out.println(practicas.validarNif(nif)?"OK":"KO");
+		int x = 67;
+		// System.out.println("El numero "+ x + (practicas.esPrimo(x)?" ES ":" NO ES ")+
+		// " PRIMO" );
+		int[][] matriz = { { 3, 4, 8 }, { 6 }, { 5, 9 } };
+		Integer[][] matriz2 = { { 3, 4, null, 8, null, 12, 37, null }, { 6, 7, 12, null, 34, 21, null, 11 },
+				{ 5, null, 9 } };
+		// practicas.recorrerMatrizIrregularPorColumnas(matriz);
+		// practicas.recorrerMatrizIrregularPorColumnas2(matriz2);
+		// int[] primos = practicas.numerosPrimos(100);
+		// int [] fibonacci = practicas.numerosFibonacci(20);
+		// ArrayList<Estudiante> lista = practicas.introListas();
+		// practicas.listaEstudiantes(practicas.introListas());
 		ArrayList<String> lista = new ArrayList<String>();
 		lista.add("120");
 		lista.add("19");
 		lista.add("-12");
 		lista.add("12");
-		//ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
-		//HashMap<String, Estudiante> mapa = practicas.introMapas();
-		//Estudiante noexisto = mapa.get("noexisto");
-		
-		//practicas.leerFicheroTexto();
-		//HashMap<String, ArrayList<Float>> hm = practicas.resumenVentasVendedor("ficheros/ventas.txt");
-		//HashMap<String, Float> resumenVentasVendedor = practicas.resumenVentasPorVendedor(hm);
-		//practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
-		
-		
-		//Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
-		practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
-		
-		
-		
+		// ArrayList<Integer> numeros = practicas.convierteCadenasANumeros(lista);
+		// HashMap<String, Estudiante> mapa = practicas.introMapas();
+		// Estudiante noexisto = mapa.get("noexisto");
+
+		// practicas.leerFicheroTexto();
+		// HashMap<String, ArrayList<Float>> hm =
+		// practicas.resumenVentasVendedor("ficheros/ventas.txt");
+		// HashMap<String, Float> resumenVentasVendedor =
+		// practicas.resumenVentasPorVendedor(hm);
+		// practicas.generaFicheroLanzamientosDado(50, "ficheros/resultadosdado.txt");
+
+		// Practicas.grabarObjetosEnFichero("ficheros/estudiantesLista.obj");
+		// practicas.leeObjetosDesdeFichero("ficheros/estudiantesLista.obj");
+
 		ArrayList<Float> movs = new ArrayList<Float>();
 		movs.add(12.5f);
 		movs.add(-12.5f);
 		movs.add(10.5f);
-		//float sFinal = practicas.calculaSaldo(20.0f, movs);
-		Collections.sort(lista);
-		
-		//HashMap<Integer, ArrayList<Float>> xyz = practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
-		//practicas.listadoIslasMeses("ficheros/visitantesIslaMes.txt");
-		practicas.copiaEstudiantesTxtAObjetos("ficheros/estudiantes.txt", "ficheros/estudiantes.obj");
+		// float sFinal = practicas.calculaSaldo(20.0f, movs);
+		// Collections.sort(lista);
+
+		// HashMap<Integer, ArrayList<Float>> xyz =
+		// practicas.visitantesIslaMes("ficheros/visitantesIslaMes.txt");
+		// practicas.listadoIslasMeses("ficheros/visitantesIslaMes.txt");
+		// practicas.copiaEstudiantesObjATxt(
+		// "ficheros/estudiantes.obj","ficheros/estudiantes2.txt");
+		// practicas.copiaEstudiantesTxtAObjetos("ficheros/estudiantes.txt",
+		// "ficheros/estudiantes.obj");
+		HashMap<String, ArrayList<String>> datosListado = practicas
+				.generarDatosListadoProvincias("ficheros/provincias.txt");
+		practicas.listadoProvinciasPorCA(datosListado);
 		System.out.println("fin");
 
 	}
