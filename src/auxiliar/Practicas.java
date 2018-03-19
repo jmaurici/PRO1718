@@ -16,8 +16,12 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import modelo.Datos;
 import modelo.Equipo;
@@ -113,6 +117,18 @@ public class Practicas {
 		// System.out.println("fin introListas");
 		return listaE;
 
+	}
+
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		List<Entry<K, V>> list = new ArrayList<>(map.entrySet());
+		list.sort((o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+
+		Map<K, V> result = new LinkedHashMap<>();
+		for (Entry<K, V> entry : list) {
+			result.put(entry.getKey(), entry.getValue());
+		}
+
+		return result;
 	}
 
 	// 11 enero 2018
