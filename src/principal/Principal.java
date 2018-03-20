@@ -1,5 +1,6 @@
 package principal;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import auxiliar.Practicas;
 import modelo.Datos;
 import modelo.Equipo;
 import modelo.Estudiante;
 import modelo.Persona;
 import modelo.Profesor;
+import modelo.dao.AccesoDatos;
 
 public class Principal {
 	// metodo por el que debe empezar la ejecución ..
@@ -158,15 +159,16 @@ public class Principal {
 		// "ficheros/estudiantes.obj");
 		HashMap<String, ArrayList<String>> datosListado = practicas
 				.generarDatosListadoProvincias("ficheros/provincias.txt");
-		//practicas.listadoProvinciasPorCA(datosListado);
-		//ORDENACION DE MAPA POR VALOR (EN VEZ DE POR CLAVE) 19 MARZO 2018
-		HashMap<String, Integer> mapa = new HashMap<String, Integer>();
-		mapa.put("X", 120);
-		mapa.put("y", 10);
-		mapa.put("z", 124);
-		mapa.put("g", 110);
-		Map<String, Integer> mp = Practicas.sortByValue(mapa);
-		
+		// practicas.listadoProvinciasPorCA(datosListado);
+		// ORDENACION DE MAPA POR VALOR (EN VEZ DE POR CLAVE) 19 MARZO 2018
+		/*
+		 * HashMap<String, Integer> mapa = new HashMap<String, Integer>(); mapa.put("X",
+		 * 120); mapa.put("y", 10); mapa.put("z", 124); mapa.put("g", 110); Map<String,
+		 * Integer> mp = Practicas.sortByValue(mapa);
+		 */
+
+		AccesoDatos ad = new AccesoDatos("root", "", "localhost", "tienda");
+		ad.conexion();
 		System.out.println("fin");
 
 	}
