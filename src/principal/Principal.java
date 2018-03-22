@@ -167,8 +167,11 @@ public class Principal {
 		 * Integer> mp = Practicas.sortByValue(mapa);
 		 */
 
-		AccesoDatos ad = new AccesoDatos("root", "", "localhost", "tienda");
-		ad.conexion();
+		
+	
+		//ad.conexion("localhost","tienda","root","");
+		AccesoDatos ad = new AccesoDatos();
+		ad.getAllRecords("localhost", "tienda", "root", "", "books");
 		System.out.println("fin");
 
 	}

@@ -1,8 +1,13 @@
 package modelo.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AccesoDatos {
 	private String usuario;
@@ -10,21 +15,15 @@ public class AccesoDatos {
 	private String host;
 	private String bd;
 
-	public AccesoDatos(String usuario, String clave, String host, String bd) {
+	public AccesoDatos() {
 		super();
-		this.usuario = usuario;
-		this.clave = clave;
-		this.host = host;
-		this.bd = bd;
+		// TODO Auto-generated constructor stub
 	}
-
-	public Connection conexion() {
-
+	public Connection conexion(String dominio, String bd, String usr, String clave) {
 		try {
-			//new AccesoDatos(usuario, clave, host, bd);
-			String url = "jdbc:mysql://" + host + "/" + bd;
+			String url = "jdbc:mysql://" + dominio + "/" + bd;
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection con = DriverManager.getConnection(url, usuario, clave);
+			Connection con = DriverManager.getConnection(url, usr, clave);
 			System.out.println("¡¡Has conectado con la bbdd!!");
 			return con;
 		} catch (InstantiationException e) {
@@ -33,7 +32,7 @@ public class AccesoDatos {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -41,4 +40,28 @@ public class AccesoDatos {
 		return null;
 
 	}
+
+	public ArrayList<HashMap<String, Object>> getAllRecords(String dominio, String bd, String usr, String clave,
+			String tabla) {
+
+		try {
+			ArrayList<HashMap<String, Object>> registros = new ArrayList<HashMap<String, Object>>();
+			Connection conexion = this.conexion(dominio, bd, usr, clave);
+			String sql = "SELECT price as precio FROM " + tabla;
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			ResultSetMetaData metaData = rs.getMetaData();
+
+			while (rs.next()) {
+				System.out.println(rs.getString("precio"));
+			}
+			stm.close();
+			rs.close();
+			return registros;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
 }
