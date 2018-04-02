@@ -19,6 +19,7 @@ public class AccesoDatos {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Connection conexion(String dominio, String bd, String usr, String clave) {
 		try {
 			String url = "jdbc:mysql://" + dominio + "/" + bd;
@@ -47,13 +48,23 @@ public class AccesoDatos {
 		try {
 			ArrayList<HashMap<String, Object>> registros = new ArrayList<HashMap<String, Object>>();
 			Connection conexion = this.conexion(dominio, bd, usr, clave);
-			String sql = "SELECT price as precio FROM " + tabla;
+			String sql = "SELECT * FROM " + tabla;
 			Statement stm = conexion.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			ResultSetMetaData metaData = rs.getMetaData();
 
+			// mostrar los nombres de las columnas...
+
+			/*
+			 * for (int i = 1; i <= metaData.getColumnCount(); i++) {
+			 * System.out.println(metaData.getColumnName(i)); }
+			 */
+
 			while (rs.next()) {
-				System.out.println(rs.getString("precio"));
+				for (int i = 1; i <= metaData.getColumnCount(); i++) {
+					System.out.print(metaData.getColumnName(i) + " => " + rs.getString(i)+ "\t");
+				}
+				System.out.println();
 			}
 			stm.close();
 			rs.close();
