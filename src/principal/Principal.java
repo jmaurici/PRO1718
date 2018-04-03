@@ -171,8 +171,11 @@ public class Principal {
 	
 		//ad.conexion("localhost","tienda","root","");
 		AccesoDatos ad = new AccesoDatos();
-		ad.getAllRecords("localhost", "tienda", "root", "", "books");
+		//ArrayList<HashMap<String, Object>> registrosTabla = ad.getAllRecords("localhost", "tienda", "root", "", "books");
+		ArrayList<ArrayList<Object>> registrosTabla = ad.getAllRecords2("localhost", "tienda", "root", "", "books");
+
 		System.out.println("fin");
+		
 
 	}
 

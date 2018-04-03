@@ -53,16 +53,12 @@ public class AccesoDatos {
 			ResultSet rs = stm.executeQuery(sql);
 			ResultSetMetaData metaData = rs.getMetaData();
 
-			// mostrar los nombres de las columnas...
-
-			/*
-			 * for (int i = 1; i <= metaData.getColumnCount(); i++) {
-			 * System.out.println(metaData.getColumnName(i)); }
-			 */
-
 			while (rs.next()) {
+				HashMap<String, Object> registro = new HashMap<String, Object>();
+				registros.add(registro);
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
-					System.out.print(metaData.getColumnName(i) + " => " + rs.getString(i)+ "\t");
+					registro.put(metaData.getColumnName(i), rs.getString(i));
+					System.out.print(metaData.getColumnName(i) + " => " + rs.getString(i) + "\t");
 				}
 				System.out.println();
 			}
@@ -75,4 +71,37 @@ public class AccesoDatos {
 		return null;
 	}
 
+	public ArrayList<ArrayList<Object>> getAllRecords2(String dominio, String bd, String usr, String clave,
+			String tabla) {
+
+		try {
+			ArrayList<ArrayList<Object>> registros = new ArrayList<ArrayList<Object>>();
+			Connection conexion = this.conexion(dominio, bd, usr, clave);
+			String sql = "SELECT * FROM " + tabla;
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			ResultSetMetaData metaData = rs.getMetaData();
+			// primera fila: nombres de campos
+			ArrayList<Object> registro = new ArrayList<Object>();
+			registros.add(registro);
+			for (int i = 1; i <= metaData.getColumnCount(); i++) 
+				registro.add(metaData.getColumnName(i));
+			// resto filas: valores de los campos	
+			while (rs.next()) {
+				registro = new ArrayList<Object>();
+				registros.add(registro);
+				for (int i = 1; i <= metaData.getColumnCount(); i++) {
+					registro.add(rs.getString(i));
+					System.out.print(metaData.getColumnName(i) + " => " + rs.getString(i) + "\t");
+				}
+				System.out.println();
+			}
+			stm.close();
+			rs.close();
+			return registros;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
 }
