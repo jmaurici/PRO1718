@@ -167,15 +167,15 @@ public class Principal {
 		 * Integer> mp = Practicas.sortByValue(mapa);
 		 */
 
-		
-	
-		//ad.conexion("localhost","tienda","root","");
+		// ad.conexion("localhost","tienda","root","");
 		AccesoDatos ad = new AccesoDatos();
-		//ArrayList<HashMap<String, Object>> registrosTabla = ad.getAllRecords("localhost", "tienda", "root", "", "books");
-		ArrayList<ArrayList<Object>> registrosTabla = ad.getAllRecords2("localhost", "tienda", "root", "", "books");
-
+		//ArrayList<HashMap<String, Object>> registrosTabla = ad.getAllRecords("localhost", "tienda", "root", "",
+				//"books");
+		// ArrayList<ArrayList<Object>> registrosTabla = ad.getAllRecords2("localhost",
+		// "tienda", "root", "", "books");
+		String sql = "INSERT INTO USUARIOS (usuario,clave) VALUES('admin3','elrincon')";
+		ad.actualizaTabla("localhost", "tienda", "root", "", sql);
 		System.out.println("fin");
-		
 
 	}
 

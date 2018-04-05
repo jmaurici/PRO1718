@@ -42,6 +42,18 @@ public class AccesoDatos {
 
 	}
 
+	public void actualizaTabla(String dominio, String bd, String usr, String clave,  String sql) {
+		try {
+			Connection conexion = this.conexion(dominio, bd, usr, clave);			
+			// + " where 1=2"
+			Statement stm = conexion.createStatement();
+			int resultado = stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
 	public ArrayList<HashMap<String, Object>> getAllRecords(String dominio, String bd, String usr, String clave,
 			String tabla) {
 
@@ -49,19 +61,31 @@ public class AccesoDatos {
 			ArrayList<HashMap<String, Object>> registros = new ArrayList<HashMap<String, Object>>();
 			Connection conexion = this.conexion(dominio, bd, usr, clave);
 			String sql = "SELECT * FROM " + tabla;
+			// + " where 1=2"
 			Statement stm = conexion.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
-			ResultSetMetaData metaData = rs.getMetaData();
 
+			ResultSetMetaData metaData = rs.getMetaData();
+			rs.first();
+			if (rs.getRow() == 0) {
+				System.out.println("NO HAY REGISTROS");
+				stm.close();
+				rs.close();
+				return null;
+			} else
+				rs.beforeFirst();
 			while (rs.next()) {
+
 				HashMap<String, Object> registro = new HashMap<String, Object>();
 				registros.add(registro);
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
 					registro.put(metaData.getColumnName(i), rs.getString(i));
 					System.out.print(metaData.getColumnName(i) + " => " + rs.getString(i) + "\t");
 				}
+
 				System.out.println();
 			}
+
 			stm.close();
 			rs.close();
 			return registros;
@@ -84,9 +108,9 @@ public class AccesoDatos {
 			// primera fila: nombres de campos
 			ArrayList<Object> registro = new ArrayList<Object>();
 			registros.add(registro);
-			for (int i = 1; i <= metaData.getColumnCount(); i++) 
+			for (int i = 1; i <= metaData.getColumnCount(); i++)
 				registro.add(metaData.getColumnName(i));
-			// resto filas: valores de los campos	
+			// resto filas: valores de los campos
 			while (rs.next()) {
 				registro = new ArrayList<Object>();
 				registros.add(registro);
