@@ -174,8 +174,10 @@ public class Principal {
 		// ArrayList<ArrayList<Object>> registrosTabla = ad.getAllRecords2("localhost",
 		// "tienda", "root", "", "books");
 		String sql = "INSERT INTO USUARIOS (usuario,clave) VALUES('admin3','elrincon')";
-		ad.actualizaTabla("localhost", "tienda", "root", "", sql);
-		System.out.println("fin");
+	//	ad.actualizaTabla("localhost", "tienda", "root", "", sql);
+		practicas.menu();
+		
+		//System.out.println("fin");
 
 	}
 

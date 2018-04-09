@@ -2,12 +2,14 @@ package auxiliar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.TypeVariable;
@@ -20,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -29,6 +32,25 @@ import modelo.Estudiante;
 
 public class Practicas {
 
+	// TERCERA EVALUACION
+	// Leer datos desde teclado...
+	public void menu() {
+		String tecleado = "XYZ";
+		while (tecleado.compareToIgnoreCase("q") != 0) {
+
+			System.out.println("\t\t MENU PRINCIPAL");
+			System.out.println("\t\t 1.Opcion 1");
+			System.out.println("\t\t 2.Opcion 2");
+			System.out.println("\t\t 3.Opcion 3");
+			System.out.println("\t\t 4.Opcion 4");
+			System.out.println("\t\t q,Q SALIR");
+			Scanner teclado = new Scanner(System.in);
+			tecleado = teclado.nextLine();
+			System.out.println("Usted ha tecleado .. " + tecleado);
+		}
+		System.out.println("Hasta la proxima");
+
+	}
 	// SEGUNDA EVALUACION
 	// LISTADO DE PROVINCIAS POR CCAA.
 

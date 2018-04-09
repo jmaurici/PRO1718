@@ -19,7 +19,7 @@ public class AccesoDatos {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+// TERCERA EVALUACION
 	public Connection conexion(String dominio, String bd, String usr, String clave) {
 		try {
 			String url = "jdbc:mysql://" + dominio + "/" + bd;
