@@ -19,7 +19,8 @@ public class AccesoDatos {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-// TERCERA EVALUACION
+
+	// TERCERA EVALUACION
 	public Connection conexion(String dominio, String bd, String usr, String clave) {
 		try {
 			String url = "jdbc:mysql://" + dominio + "/" + bd;
@@ -42,9 +43,9 @@ public class AccesoDatos {
 
 	}
 
-	public void actualizaTabla(String dominio, String bd, String usr, String clave,  String sql) {
+	public void actualizaTabla(String dominio, String bd, String usr, String clave, String sql) {
 		try {
-			Connection conexion = this.conexion(dominio, bd, usr, clave);			
+			Connection conexion = this.conexion(dominio, bd, usr, clave);
 			// + " where 1=2"
 			Statement stm = conexion.createStatement();
 			int resultado = stm.executeUpdate(sql);
@@ -127,5 +128,38 @@ public class AccesoDatos {
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+
+	public void consultaPadronCAProvincias() {
+
+		try {
+			Connection conexion = this.conexion("localhost", "paro", "root", "");
+			String sql = "select CA as Comunidad, provincia, sum(padron) as padron from padron pa inner join provincias p1, comunidadesautonomas c1, municipios m1 "
+					+ " where pa.CodMunicipio = m1.CodMunicipio and m1.CodProvincia = p1.CodProvincia and p1.CodCA = c1.CodCA group by p1.CodProvincia order by c1.CA, p1.Provincia";
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			int subtotal = 0, total = 0;
+			String ca_ant = "";
+			while (rs.next()) {
+
+				if (!rs.getString(1).equals(ca_ant) ) {
+					//&& !ca_ant.equals("")
+					System.out.println("COMUNIDAD AUTONOMA : " + rs.getString(1));
+					total += subtotal;
+					
+					System.out.println(" TOTAL COMUNIDAD AUTONOMA : " + ca_ant  + ", " + subtotal);
+					subtotal = 0;
+					ca_ant= rs.getString(1);
+				}
+				System.out.println("\t\t" +  rs.getString(2) + " = " + rs.getInt(3) );
+				subtotal += rs.getInt(3);
+
+			}
+			System.out.println("TOTAL ESPAÑA : " + total);
+			rs.close();
+			stm.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

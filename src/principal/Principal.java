@@ -157,8 +157,8 @@ public class Principal {
 		// "ficheros/estudiantes.obj","ficheros/estudiantes2.txt");
 		// practicas.copiaEstudiantesTxtAObjetos("ficheros/estudiantes.txt",
 		// "ficheros/estudiantes.obj");
-		HashMap<String, ArrayList<String>> datosListado = practicas
-				.generarDatosListadoProvincias("ficheros/provincias.txt");
+		//HashMap<String, ArrayList<String>> datosListado = practicas
+			//	.generarDatosListadoProvincias("ficheros/provincias.txt");
 		// practicas.listadoProvinciasPorCA(datosListado);
 		// ORDENACION DE MAPA POR VALOR (EN VEZ DE POR CLAVE) 19 MARZO 2018
 		/*
@@ -175,8 +175,8 @@ public class Principal {
 		// "tienda", "root", "", "books");
 		String sql = "INSERT INTO USUARIOS (usuario,clave) VALUES('admin3','elrincon')";
 	//	ad.actualizaTabla("localhost", "tienda", "root", "", sql);
-		practicas.menu();
-		
+		//practicas.menu();
+		ad.consultaPadronCAProvincias();
 		//System.out.println("fin");
 
 	}

@@ -48,6 +48,7 @@ public class Practicas {
 			tecleado = teclado.nextLine();
 			System.out.println("Usted ha tecleado .. " + tecleado);
 		}
+		
 		System.out.println("Hasta la proxima");
 
 	}
