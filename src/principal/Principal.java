@@ -176,8 +176,10 @@ public class Principal {
 		String sql = "INSERT INTO USUARIOS (usuario,clave) VALUES('admin3','elrincon')";
 	//	ad.actualizaTabla("localhost", "tienda", "root", "", sql);
 		//practicas.menu();
-		ad.consultaPadronCAProvincias();
-		//System.out.println("fin");
+		//ad.consultaPadronCAProvincias();
+	//	int[][] mat2 = practicas.ejercicio1(3, 4, 15, 75);
+		practicas.listarFacturas();
+		System.out.println("fin");
 
 	}
 

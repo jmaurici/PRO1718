@@ -13,6 +13,10 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.TypeVariable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -29,10 +33,21 @@ import java.util.Map.Entry;
 import modelo.Datos;
 import modelo.Equipo;
 import modelo.Estudiante;
+import modelo.dao.AccesoDatos;
 
 public class Practicas {
 
 	// TERCERA EVALUACION
+	// examen 2017
+	public int[][] ejercicio1(int nFilas, int nColumnas, int inferior, int superior) {
+		int[][] devuelto = new int[nFilas][nColumnas];
+		Random rnd = new Random();
+		for (int i = 0; i < devuelto.length; i++)
+			for (int j = 0; j < nColumnas; j++)
+				devuelto[i][j] = inferior + rnd.nextInt(superior - inferior);
+		return devuelto;
+	}
+
 	// Leer datos desde teclado...
 	public void menu() {
 		String tecleado = "XYZ";
@@ -48,7 +63,7 @@ public class Practicas {
 			tecleado = teclado.nextLine();
 			System.out.println("Usted ha tecleado .. " + tecleado);
 		}
-		
+
 		System.out.println("Hasta la proxima");
 
 	}
@@ -350,7 +365,52 @@ public class Practicas {
 			System.out.println(e.getMessage());
 		}
 	}
+	public void listarFacturas() {
+		try {
+			// conectar
+			AccesoDatos ad = new AccesoDatos();
+			Connection cnx = ad.conexion("localhost", "tienda", "root", "");
+			// crear Statement
+			Statement stmt = cnx.createStatement();
+			// sentencia sql
+			String sql = "SELECT * FROM order_details order by order_id";
+			// lanzar la consulta
+			ResultSet rSet = stmt.executeQuery(sql);
+			// iterar el rSet
+			float subtotal = 0;
+			float total = 0;
+			float order_id_ant = 0 ;
+			boolean primeraVez=true;
+			while (rSet.next()) {
+				float order_id = rSet.getFloat(7);
+				String titulo = rSet.getString("title");
+				float precio = rSet.getFloat("price");
+				int cantidad = rSet.getInt(5);
+				float totalLinea = precio * cantidad;
+				if (primeraVez)
+				{
+					order_id_ant=order_id;
+					primeraVez=false;
+				}
+				if (order_id != order_id_ant) {			
+					System.out.println("SUBTOTAL :" + order_id_ant + "\t" + subtotal);
+					total += subtotal;
+					order_id_ant = order_id;
+					subtotal = 0;
+				}			
+				System.out.println(order_id + " : " + titulo + "\t" + precio + "\t" + cantidad + "\t" + totalLinea);
+				subtotal += totalLinea;
 
+			}
+			System.out.println("SUBTOTAL :" + order_id_ant + "\t" + subtotal);
+			System.out.println("TOTAL :\t" + order_id_ant + total);
+			stmt.close();
+			rSet.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
 	public void leerFicheroTextoOrdenadoClave(String rutaFichero) {
 		try {
 			// Abrir el fichero
